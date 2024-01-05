@@ -102,8 +102,8 @@ st.set_page_config(
   page_title = "A11.2020.12668 - NELLIS NERIA AURUM TECTONA",
 )
 
-st.title("Hungarian Heart Disease")
-st.write(f"**_Model's Accuracy_** :  :green[**{accuracy}**]% (:red[_Do not copy outright_])")
+st.title("Hungarian Heart Disease - BKDS")
+st.write(f"**Hasil akurasi model menggunakan XGBoost** :  :green[**{accuracy}**]% ")
 st.write("")
 
 tab1, tab2 = st.tabs(["Single-predict", "Multi-predict"])
