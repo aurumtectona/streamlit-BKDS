@@ -1,3 +1,4 @@
+#import library
 import itertools
 import pandas as pd
 import numpy as np
@@ -7,6 +8,7 @@ import streamlit as st
 import time
 import pickle
 
+#load dataset
 with open("data/hungarian.data", encoding='Latin1') as file:
   lines = [line.strip() for line in file]
 
@@ -17,14 +19,19 @@ data = itertools.takewhile(
 
 df = pd.DataFrame.from_records(data)
 
+#menghapus data yang bertipe object atau string
 df = df.iloc[:, :-1]
 df = df.drop(df.columns[0], axis=1)
 df = df.astype(float)
 
+#validasi data
+#data dengan value -9.0 diganti dengan nilai kosong
 df.replace(-9.0, np.NaN, inplace=True)
 
+#menentukan object data yang digunakan
 df_selected = df.iloc[:, [1, 2, 7, 8, 10, 14, 17, 30, 36, 38, 39, 42, 49, 56]]
 
+#mengganti penamaan kolom
 column_mapping = {
   2: 'age',
   3: 'sex',
@@ -86,6 +93,7 @@ y = df_clean['target']
 smote = SMOTE(random_state=42)
 X, y = smote.fit_resample(X, y)
 
+#load model
 model = pickle.load(open("model/xgb_model.pkl", 'rb'))
 
 y_pred = model.predict(X)
